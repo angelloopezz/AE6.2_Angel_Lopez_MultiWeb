@@ -1,0 +1,238 @@
+header {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    margin-bottom: 5px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    
+}
+
+body {
+    margin: 0;
+}
+
+.titulo {
+    margin-right: 50px;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    margin-left: 10px;
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+    font-size: 20px;
+
+}
+
+nav {
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    display: flex;
+
+}
+
+header img {
+    width: 40px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.verificacion,
+.logo {
+    display: none;
+}
+
+li:hover > a{
+    opacity: 1;
+    color: black;
+    background-color: white;
+    padding: 20px;
+  
+}
+
+/*Permite visualizar mediante una linea el progreso mientras se hace scroll vertical */
+.progreso {
+    height: 4px;
+    background: red;
+    position: fixed;
+    margin-top: 80px;
+    left: 0;
+    width: 0; 
+    z-index: 1000;
+    animation: aumentar auto linear forwards; /* representa el nombre de la animacion, la duracion, */
+    animation-timeline: scroll(root block);
+}
+
+@keyframes aumentar {
+    from { width: 0; } 
+    to { width: 100%; } 
+}
+
+
+/* menu hamburguesa responsive */
+
+@media (max-width:700px) {
+    .logo {
+        display: block;
+        cursor: pointer;
+    }
+
+    ul a li {
+        display: block;
+        margin: 10px 0;
+        flex-direction: column;
+    }
+
+    .listado {
+        flex-direction: column;
+        padding: 10px;
+        justify-items: center;
+    }
+
+    .listado li {
+        padding: 10px;
+    }
+
+    .verificacion:checked+.miMenu {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .titulos{
+        font-size: 12px;
+    }
+    .miMenu {
+        position: fixed;
+        top: 80px;
+        background: black;
+        width: 100%;
+        left: 0;
+        display: flex;
+        justify-content: space-evenly;
+
+        li:hover > a{
+            opacity: 1;
+            color: black;
+            background-color: white;
+            padding: 10px;
+          
+        }
+        align-items: center;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 0, 0% 0%);
+        transition: clip-path 0.5s ease-in-out;
+    }
+
+}
+
+/* cuerpo de la pagina */
+.contenedor_principal{
+    padding-top: 100px;
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.peliculas{
+    width: 31%;
+    border: solid 3px black;
+    background-color: lightgrey;
+    margin-bottom: 20px;
+    min-width: 250px;
+    
+}
+
+.peliculas h1{
+    text-align: center;
+    color: brown;
+    
+}
+
+.separador{
+    border-bottom: 2px dotted brown;
+}
+
+.peliculas img{
+   
+    width: 300px;
+    max-width: 70%;
+    float: left;
+    margin-left: 20px;
+    border: 3px solid white;
+    margin-top: 25px;
+    margin-right: 20px;
+}
+
+.imagen .textos{
+    color: white;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 120px;
+    transform: scale(0);
+    transition: aumento ease 0.7s, visibility 0s 0.9s; 
+}
+
+
+img:hover{      /* animacion efecto hover*/
+    filter: brightness(0.4);
+    transition: ease 0.4s;
+}
+
+img:hover + .textos{        /* animacion efecto hover*/
+    visibility: visible;
+    transform: scale(1);
+    transition: aumento ease 0.8s, visibility 0s;
+}
+
+.titulos{
+    width: 100%;
+    background-color: beige;
+    overflow: hidden;
+    height: 70px;  
+}
+
+p{
+    text-align: justify;
+    margin: 15px;
+}
+
+
+@keyframes show{        /* animacion transparencia */
+    from {
+        opacity: 0;
+        scale: 25%;
+    }
+
+    to{
+        opacity: 1;
+        scale: 100%;
+    }
+}
+
+img{        /* animacion efeco scroll en las imagenes*/
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 25% cover 30%;
+    animation-fill-mode: both;
+}
+
+
